@@ -18,7 +18,9 @@ class ApiTest(TestCase):
     )
     self.assertEqual(response.status_code, 200)
 
-  def test_location_route_returns_json(self):
+
+  def test_location_route_returns_list(self):
+
     response = self.client.get(
       '/locations/',
       HTTP_X_REQUESTED_WITH='XMLHttpRequest'
@@ -26,40 +28,18 @@ class ApiTest(TestCase):
 
     data = json.loads(response.content.decode())
 
-    single_film = {
-      "actor_1": "Siddarth",
-      "actor_2": "Nithya Menon",
-      "actor_3": "Priya Anand",
-      "director": "Jayendra",
-      "locations": "Epic Roasthouse (399 Embarcadero)",
-      "production_company": "SPI Cinemas",
-      "release_year": "2011",
-      "title": "180",
-      "writer": "Umarji Anuradha, Jayendra, Aarthi Sriram, & Suba "
-    }
+    self.assertIsInstance(data, type([]), "Response is not a list")
 
-    self.assertIn(single_film, data['films'])
 
   def test_location_route_takes_search_parameter(self):
+
+    # Gibberish search text should cause request to return an empty list
     response = self.client.get(
       '/locations/',
-      {'search_text': '180'},
+      {'search_text': 'asdfasdfasdfasdfasdf0owkd'},
       HTTP_X_REQUESTED_WITH='XMLHttpRequest'
     )
 
     data = json.loads(response.content.decode())
 
-    single_film = {
-      "actor_1": "Sarah Jones",
-      "actor_2": "Elizabeth Sarnoff",
-      "actor_3": "Bryan Wynbrandt",
-      "director": "J.J. Abrams",
-      "distributor": "Warner Bros. Television",
-      "locations": "Taylor St. from Broadway to Filbert",
-      "production_company": "Bonanza Productions Inc.",
-      "release_year": "2012",
-      "title": "Alcatraz",
-      "writer": "Steven Lilien"
-    }
-
-    self.assertNotIn(single_film, data['films'])
+    self.assertFalse(data)

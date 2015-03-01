@@ -28,6 +28,6 @@ def locations(request):
 
   films = resp.json()
 
-  return_data = {'films': films}
+  return_data = {'locations': films}
 
-  return JsonResponse(return_data)
+  return JsonResponse(films, safe=False)
