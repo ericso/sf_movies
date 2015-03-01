@@ -7,7 +7,7 @@ class ApiTest(TestCase):
   """Test class for locations Api
 
   Routes:
-  GET /locations - Returns JSON containing all locations
+  GET /locations/ - Returns JSON containing all locations
   GET /locations/:search_text - Returns JSON containing locations filtered by the search_text
   """
 

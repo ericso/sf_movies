@@ -19,6 +19,8 @@ def locations(request):
   if search_text is not None:
     params['title'] = search_text
 
+  # The API key is not necessary for querying, see API documentation at
+  #  http://dev.socrata.com/docs/app-tokens.html
   headers = {'X-APP-TOKEN': API_KEY}
   resp = requests.get(
     API_ENDPOINT,
@@ -27,7 +29,10 @@ def locations(request):
   )
 
   films = resp.json()
-
   return_data = {'locations': films}
 
+  # The front-end is using Backbonejs and currently expects the response to
+  #  be a list of dictionaries. Django's JsonResponse's safe parameter
+  #  needs to be explicitly set to false to allow non-dictionary return
+  #  values.
   return JsonResponse(films, safe=False)
