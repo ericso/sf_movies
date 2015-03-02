@@ -5,15 +5,15 @@ jQuery(document).ready(function($) {
   //   options.url = 'http://localhost:8000' + options.url;
   // });
 
-  var Locations = Backbone.Collection.extend({
+  App.Collections.Locations = Backbone.Collection.extend({
     url: '/locations/',
   });
 
-  var LocationList = Backbone.View.extend({
+  App.Views.LocationList = Backbone.View.extend({
     el: '.page',
     render: function() {
       var that = this;
-      var locations = new Locations();
+      var locations = new App.Collections.Locations();
       locations.fetch({
         success: function(locations) {
           var template = _.template(
@@ -26,15 +26,15 @@ jQuery(document).ready(function($) {
     }
   });
 
-  var locationList = new LocationList();
+  var locationList = new App.Views.LocationList();
 
   // Set up front-end routing
-  var Router = Backbone.Router.extend({
+  App.Routers.Router = Backbone.Router.extend({
     routes: {
       '': 'home',
     },
   });
-  var router = new Router();
+  var router = new App.Routers.Router();
   router.on('route:home', function () {
     locationList.render();
   });
