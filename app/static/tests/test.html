@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Backbone.js Tests</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/mocha/2.1.0/mocha.css" rel="stylesheet" >
+</head>
+<body>
+
+  <div id="mocha"></div>
+
+  <!-- JavaScript Test Libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mocha/2.1.0/mocha.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/2.1.0/chai.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sinon.js/1.7.3/sinon-min.js"></script>
+
+  <!-- JavaScript Core Libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.2/underscore-min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.2/backbone-min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+  <!-- JavaScript Application Libraries -->
+  <script src="/static/app.js"></script>
+
+  <!-- Testing Setup -->
+  <script>
+    // Setup
+    var expect = chai.expect;
+    mocha.setup('bdd');
+
+    // Run tests on the window load event
+    window.onload = function() {
+      mocha.run();
+    };
+  </script>
+
+  <!-- Specs -->
+  <script src="spec/app.spec.js"></script>
+
+</body>
+</html>
