@@ -1,4 +1,5 @@
-jQuery(document).ready(function($) {
+$(function() {
+  'use strict';
 
   // TODO(eso) change this to account for where server is hosted
   // $ajaxPrefilter(function(options, originalOptions, jqXHR) {
@@ -13,8 +14,8 @@ jQuery(document).ready(function($) {
     el: '.page',
     render: function() {
       var that = this;
-      var locations = new App.Collections.Locations();
-      locations.fetch({
+      app.locations = new App.Collections.Locations();
+      app.locations.fetch({
         success: function(locations) {
           var template = _.template(
             $('#location-list-template').html()
@@ -26,7 +27,7 @@ jQuery(document).ready(function($) {
     }
   });
 
-  var locationList = new App.Views.LocationList();
+  app.locationList = new App.Views.LocationList();
 
   // Set up front-end routing
   App.Routers.Router = Backbone.Router.extend({
@@ -34,9 +35,9 @@ jQuery(document).ready(function($) {
       '': 'home',
     },
   });
-  var router = new App.Routers.Router();
-  router.on('route:home', function () {
-    locationList.render();
+  app.router = new App.Routers.Router();
+  app.router.on('route:home', function () {
+    app.locationList.render();
   });
 
   Backbone.history.start();

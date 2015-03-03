@@ -1,3 +1,4 @@
+// Spec file for testing namespace.js
 
 describe('Namespace', function() {
 
