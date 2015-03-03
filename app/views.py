@@ -1,8 +1,10 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
+from sf_movies.settings import GOOGLE_API_KEY
+
 
 def home(request):
   """Renders the home view of the app
   """
-  return render(request, 'home.html', {'GOOGLE_API_KEY': 'AIzaSyCq2vRo28y8UnbW2kwxn2oihcXBc0eH1iE'})
+  return render(request, 'home.html', {'GOOGLE_API_KEY': GOOGLE_API_KEY})

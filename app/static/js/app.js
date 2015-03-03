@@ -17,10 +17,28 @@ $(function() {
       app.locations = new App.Collections.Locations();
       app.locations.fetch({
         success: function(locations) {
+          // Render table with locations
           var template = _.template(
             $('#location-list-template').html()
           )({locations: locations.models});
           that.$el.html(template);
+
+          _.each(locations.models, function(location) {
+            fields = location.get('fields');
+
+            // Add location pins to map
+            var coords = new google.maps.LatLng(
+              fields['latitude'],
+              fields['longitude']
+            );
+            var marker = new google.maps.Marker({
+              position: coords,
+              map: app.map,
+              title: fields['title']
+            });
+
+            // app.markers.append(marker);
+          });
         }
       });
 
