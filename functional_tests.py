@@ -27,14 +27,11 @@ class NewVisitorTest(unittest.TestCase):
     # The user then also sees a map below the search box
     map_area = self.browser.find_element_by_id('id_map')
 
-    # Within the map, the user sees pins representing movies
-
-
-    # The user decides to filter for the movie "Movie Title"
-    searchbox.send_keys('Movie Title')
+    # The user decides to filter for the movie "180"
+    searchbox.send_keys('180')
     searchbox.send_keys(Keys.ENTER)
 
-    # The map changes to show only the movie "Movie Title"
+    # The map changes to show only the locations for the movie "180"
 
 
     self.fail('Finish the test!')
