@@ -5,8 +5,9 @@ import json
 import requests
 
 
-API_ENDPOINT = 'https://data.sfgov.org/resource/yitu-d5am.json'
-API_KEY = 'iXBPg47nIqMKX8hBFqot8fTtH'
+SFGOV_API_ENDPOINT = 'https://data.sfgov.org/resource/yitu-d5am.json'
+SFGOV_API_KEY = 'iXBPg47nIqMKX8hBFqot8fTtH'
+
 
 def locations(request):
   """Returns JSON response containing full query to SF Film API
@@ -21,9 +22,9 @@ def locations(request):
 
   # The API key is not necessary for querying, see API documentation at
   #  http://dev.socrata.com/docs/app-tokens.html
-  headers = {'X-APP-TOKEN': API_KEY}
+  headers = {'X-APP-TOKEN': SFGOV_API_ENDPOINT}
   resp = requests.get(
-    API_ENDPOINT,
+    SFGOV_API_KEY,
     params=params,
     headers=headers
   )
