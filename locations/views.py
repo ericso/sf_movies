@@ -22,9 +22,9 @@ def locations(request):
 
   # The API key is not necessary for querying, see API documentation at
   #  http://dev.socrata.com/docs/app-tokens.html
-  headers = {'X-APP-TOKEN': SFGOV_API_ENDPOINT}
+  headers = {'X-APP-TOKEN': SFGOV_API_KEY}
   resp = requests.get(
-    SFGOV_API_KEY,
+    SFGOV_API_ENDPOINT,
     params=params,
     headers=headers
   )

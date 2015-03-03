@@ -1,6 +1,6 @@
-from django.test import TestCase
-
 import json
+
+from django.test import TestCase
 
 
 class ApiTest(TestCase):
