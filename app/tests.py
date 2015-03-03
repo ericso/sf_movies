@@ -1,5 +1,6 @@
 from django.test import TestCase
 from django.core.urlresolvers import resolve
+from django.db.utils import IntegrityError
 
 from app.views import home
 
@@ -28,9 +29,17 @@ class HomePageTest(TestCase):
 class LocationModelTest(TestCase):
   """Test case for the Location model
   """
+
   def test_location_model_unique_together(self):
     location1 = Location.objects.create(
       title="A Title",
       locations="Some Location"
     )
     location1.save()
+
+    with self.assertRaises(IntegrityError):
+      location2 = Location.objects.create(
+        title="A Title",
+        locations="Some Location"
+      )
+      location2.save()
