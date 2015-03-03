@@ -1,12 +1,11 @@
-from django.shortcuts import render
-from django.http import JsonResponse
-
 import json
 import requests
 
+from django.shortcuts import render
+from django.http import JsonResponse
+from django.core import serializers
 
-SFGOV_API_ENDPOINT = 'https://data.sfgov.org/resource/yitu-d5am.json'
-SFGOV_API_KEY = 'iXBPg47nIqMKX8hBFqot8fTtH'
+from locations.models import Location
 
 
 def locations(request):
@@ -20,20 +19,11 @@ def locations(request):
   if search_text is not None:
     params['title'] = search_text
 
-  # The API key is not necessary for querying, see API documentation at
-  #  http://dev.socrata.com/docs/app-tokens.html
-  headers = {'X-APP-TOKEN': SFGOV_API_KEY}
-  resp = requests.get(
-    SFGOV_API_ENDPOINT,
-    params=params,
-    headers=headers
-  )
-
-  films = resp.json()
-  return_data = {'locations': films}
+  query_data = Location.objects.all()
+  json_data = serializers.serialize('json', query_data)
 
   # The front-end is using Backbonejs and currently expects the response to
   #  be a list of dictionaries. Django's JsonResponse's safe parameter
   #  needs to be explicitly set to false to allow non-dictionary return
   #  values.
-  return JsonResponse(films, safe=False)
+  return JsonResponse(json.loads(json_data), safe=False)

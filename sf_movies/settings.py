@@ -26,6 +26,12 @@ TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# API Keys and Endpoints
+SFGOV_API_ENDPOINT = 'https://data.sfgov.org/resource/yitu-d5am.json'
+SFGOV_API_KEY = 'iXBPg47nIqMKX8hBFqot8fTtH'
+
+GOOGLE_API_KEY = 'AIzaSyCq2vRo28y8UnbW2kwxn2oihcXBc0eH1iE'
+GOOGLE_GEOCODING_ENDNPOINT = 'https://maps.googleapis.com/maps/api/geocode/json'
 
 # Application definition
 

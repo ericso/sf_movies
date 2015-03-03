@@ -30,9 +30,10 @@
       </thead>
       <tbody>
         <% _.each(locations, function(location) {  %>
+        <%   fields = location.get('fields')       %>
           <tr>
-            <td><%= location.get('title') %></td>
-            <td><%= location.get('locations') %></td>
+            <td><%= fields['title'] %></td>
+            <td><%= fields['locations'] %></td>
           </tr>
         <% }); %>
       </tbody>

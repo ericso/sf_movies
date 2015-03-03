@@ -11,9 +11,10 @@ class Location(models.Model):
   distributor = models.TextField(blank=True, null=True)
   director = models.TextField(blank=True, null=True)
   writer = models.TextField(blank=True, null=True)
-  actor1 = models.TextField(blank=True, null=True)
-  actor2 = models.TextField(blank=True, null=True)
-  actor3 = models.TextField(blank=True, null=True)
+  actor_1 = models.TextField(blank=True, null=True)
+  actor_2 = models.TextField(blank=True, null=True)
+  actor_3 = models.TextField(blank=True, null=True)
+
   latitude = models.DecimalField(
     decimal_places=4,
     max_digits=8,
@@ -28,8 +29,8 @@ class Location(models.Model):
   )
 
   class Meta:
-    ordering = ('id',)
+    # ordering = ('id',)
     unique_together = ('title', 'locations')
 
   def __str__(self):
-    return self.title + " at " + self.locations
+    return("%s at %s" % (self.title, self.locations))
