@@ -1,5 +1,6 @@
 // Loads the Google Maps V3 API and setup up the map
 $(function() {
+  'use strict';
 
   var mapOptions = {
     zoom: 12,

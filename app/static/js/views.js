@@ -6,10 +6,6 @@ $(function() {
   //   options.url = 'http://localhost:8000' + options.url;
   // });
 
-  App.Collections.Locations = Backbone.Collection.extend({
-    url: '/locations/',
-  });
-
   // Backbone View for the search bar
   App.Views.SearchBar = Backbone.View.extend({
     el: '#id_search_container',
@@ -65,21 +61,7 @@ $(function() {
     }
   });
 
-  app.locationList = new App.Views.LocationList();
   app.searchBar = new App.Views.SearchBar();
-
-  // Set up front-end routing
-  App.Routers.Router = Backbone.Router.extend({
-    routes: {
-      '': 'home',
-      ':search': 'home',
-    },
-  });
-  app.router = new App.Routers.Router();
-  app.router.on('route:home', function (search) {
-    app.locationList.render(search);
-  });
-
-  Backbone.history.start();
+  app.locationList = new App.Views.LocationList();
 
 });
