@@ -41,13 +41,48 @@ $(function() {
           )({locations: locations.models});
           that.$el.html(template);
 
+          // Clear autocomplete_tags array
+          app.autocomplete_tags = [];
+
           // Clear out the map
           app.map.deleteMarkers();
 
-          // Add location pins to map
+          // Loop through all results from Ajax query
           _.each(locations.models, function(location) {
             fields = location.get('fields');
 
+            // Add tags to autocomplete
+            // We make sure that the tag is not null and that it
+            //  doesn't already exist in the tag array
+            if (fields['title'] != null && $.inArray(fields['title'], app.autocomplete_tags) === -1) {
+              app.autocomplete_tags.push(fields['title']);
+            }
+            if (fields['locations'] != null && $.inArray(fields['locations'], app.autocomplete_tags) === -1) {
+              app.autocomplete_tags.push(fields['locations']);
+            }
+            if (fields['production_company'] != null && $.inArray(fields['production_company'], app.autocomplete_tags) === -1) {
+              app.autocomplete_tags.push(fields['production_company']);
+            }
+            if (fields['distributor'] != null && $.inArray(fields['distributor'], app.autocomplete_tags) === -1) {
+              app.autocomplete_tags.push(fields['distributor']);
+            }
+            if (fields['director'] != null && $.inArray(fields['director'], app.autocomplete_tags) === -1) {
+              app.autocomplete_tags.push(fields['director']);
+            }
+            if (fields['writer'] != null && $.inArray(fields['writer'], app.autocomplete_tags) === -1) {
+              app.autocomplete_tags.push(fields['writer']);
+            }
+            if (fields['actor_1'] != null && $.inArray(fields['actor_1'], app.autocomplete_tags) === -1) {
+              app.autocomplete_tags.push(fields['actor_1']);
+            }
+            if (fields['actor_2'] != null && $.inArray(fields['actor_2'], app.autocomplete_tags) === -1) {
+              app.autocomplete_tags.push(fields['actor_2']);
+            }
+            if (fields['actor_3'] != null && $.inArray(fields['actor_3'], app.autocomplete_tags) === -1) {
+              app.autocomplete_tags.push(fields['actor_3']);
+            }
+
+            // Add location pins to map
             app.map.addMarker(
               fields['latitude'],
               fields['longitude'],
@@ -55,6 +90,13 @@ $(function() {
             );
 
           });
+
+          // For auto-complete search, we will source our tag list from the
+          //  most of the fields in the film location schema
+          $('#id_search_input').autocomplete({
+            source: app.autocomplete_tags
+          });
+          console.log(app.autocomplete_tags);
         }
       });
 
