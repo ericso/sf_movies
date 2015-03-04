@@ -25,7 +25,7 @@ $(function() {
     },
     doSearch: function(event) {
       event.preventDefault();
-      // alert("search for " + $('#id_search_input').val());
+      // Trigger the home route but now with a search term
       app.router.navigate('/' + $('#id_search_input').val(), {trigger: true});
     }
   });
@@ -45,21 +45,19 @@ $(function() {
           )({locations: locations.models});
           that.$el.html(template);
 
+          // Clear out the map
+          app.map.deleteMarkers();
+
+          // Add location pins to map
           _.each(locations.models, function(location) {
             fields = location.get('fields');
 
-            // Add location pins to map
-            var coords = new google.maps.LatLng(
+            app.map.addMarker(
               fields['latitude'],
-              fields['longitude']
+              fields['longitude'],
+              fields['title']
             );
-            var marker = new google.maps.Marker({
-              position: coords,
-              map: app.map,
-              title: fields['title']
-            });
 
-            // app.markers.append(marker);
           });
         }
       });
