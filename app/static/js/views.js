@@ -13,39 +13,15 @@ $(function() {
       this.render();
     },
     render: function() {
-      var template = _.template($('#search-template').html(), {});
-      this.$el.html(template);
-    },
-    events: {
-      'submit': 'doSearch'
-    },
-    doSearch: function(event) {
-      event.preventDefault();
-      // Trigger the home route but now with a search term
-      app.router.navigate('/' + $('#id_search_input').val(), {trigger: true});
-    }
-  });
-
-  // Backbone View for Map and Table
-  App.Views.LocationList = Backbone.View.extend({
-    el: '.page',
-    render: function(search) {
       var that = this;
-      app.locations = new App.Collections.Locations();
-      app.locations.fetch({
-        data: $.param({'search': search}),
+      app.autocomplete_locations = new App.Collections.AutoCompleteLocations();
+      app.autocomplete_locations.fetch({
         success: function(locations) {
-          // Render table with locations
-          var template = _.template(
-            $('#location-list-template').html()
-          )({locations: locations.models});
+          var template = _.template($('#search-template').html(), {});
           that.$el.html(template);
 
           // Clear autocomplete_tags array
           app.autocomplete_tags = [];
-
-          // Clear out the map
-          app.map.deleteMarkers();
 
           // Loop through all results from Ajax query
           _.each(locations.models, function(location) {
@@ -81,14 +57,6 @@ $(function() {
             if (fields['actor_3'] != null && $.inArray(fields['actor_3'], app.autocomplete_tags) === -1) {
               app.autocomplete_tags.push(fields['actor_3']);
             }
-
-            // Add location pins to map
-            app.map.addMarker(
-              fields['latitude'],
-              fields['longitude'],
-              fields['title']
-            );
-
           });
 
           // For auto-complete search, we will source our tag list from the
@@ -96,7 +64,48 @@ $(function() {
           $('#id_search_input').autocomplete({
             source: app.autocomplete_tags
           });
-          console.log(app.autocomplete_tags);
+        }
+      });
+    },
+    events: {
+      'submit': 'doSearch'
+    },
+    doSearch: function(event) {
+      event.preventDefault();
+      // Trigger the home route but now with a search term
+      app.router.navigate('/' + $('#id_search_input').val(), {trigger: true});
+    }
+  });
+
+  // Backbone View for Map and Table
+  App.Views.LocationList = Backbone.View.extend({
+    el: '.page',
+    render: function(search) {
+      var that = this;
+      app.locations = new App.Collections.Locations();
+      app.locations.fetch({
+        data: $.param({'search': search}),
+        success: function(locations) {
+          // Render table with locations
+          var template = _.template(
+            $('#location-list-template').html()
+          )({locations: locations.models});
+          that.$el.html(template);
+
+          // Clear out the map
+          app.map.deleteMarkers();
+
+          // Loop through all results from Ajax query
+          _.each(locations.models, function(location) {
+            fields = location.get('fields');
+
+            // Add location pins to map
+            app.map.addMarker(
+              fields['latitude'],
+              fields['longitude'],
+              fields['title']
+            );
+          });
         }
       });
 

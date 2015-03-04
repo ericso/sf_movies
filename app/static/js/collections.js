@@ -5,4 +5,8 @@ $(function() {
     url: '/locations/',
   });
 
+  App.Collections.AutoCompleteLocations = Backbone.Collection.extend({
+    url: '/locations/',
+  })
+
 });
