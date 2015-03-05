@@ -5,7 +5,7 @@ Problem/Solution
 -----------
 
     The problem is to create an app that displays San Francisco filming locations on a map.
-    The data is obtained at DataSF: Film Locations.
+    The data is obtained at [DataSF](https://data.sfgov.org/): [Film Locations](https://data.sfgov.org/Culture-and-Recreation/Film-Locations-in-San-Francisco/yitu-d5am?).
     
     The solution uses Django on the back-end to query the DataSF API, store it and expose another API to serve it.
     Backbone.js and Google's Maps Javascript API is used on the front-end to create a UI to display the data on
@@ -63,4 +63,6 @@ Architecture
     divs on the page on map click events. Also, doing a search should move and/or rescale the map.
     
 
-Please visit the deployed site at sffilms.heroku.com
+Please visit the deployed site at [SF Films](sffilms.heroku.com)
+
+Please visit my about.me page at about.me/ericso
