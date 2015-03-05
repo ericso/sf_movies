@@ -25,7 +25,7 @@ $(function() {
 
           // Loop through all results from Ajax query
           _.each(locations.models, function(location) {
-            fields = location.get('fields');
+            var fields = location.get('fields');
 
             // Add tags to autocomplete
             // We make sure that the tag is not null and that it
@@ -97,13 +97,15 @@ $(function() {
 
           // Loop through all results from Ajax query
           _.each(locations.models, function(location) {
-            fields = location.get('fields');
+            var fields = location.get('fields');
 
             // Add location pins to map
             app.map.addMarker(
               fields['latitude'],
               fields['longitude'],
-              fields['title']
+              fields['title'],
+              fields['locations'],
+              fields['fun_facts']
             );
           });
         }

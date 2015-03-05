@@ -17,15 +17,47 @@ $(function() {
   // Array to hold all the map marks we will add
   app.markers = [];
 
+  // Add an info window
+  google.maps.Map.prototype.addInfoWindow = function(content, marker) {
+    // Create the info window
+    var infoWindow = new google.maps.InfoWindow({
+      content: content
+    });
+    // Attach it to the onclick event for the marker on the map
+    google.maps.event.addListener(marker, 'click', function() {
+      infoWindow.open(app.map, marker);
+    });
+  }
+
   // Add a marker to the map and push to the array.
-  google.maps.Map.prototype.addMarker = function(lat, lng, title) {
+  google.maps.Map.prototype.addMarker = function(lat, lng, title, locations, fun_facts) {
     var coords = new google.maps.LatLng(lat, lng);
     var marker = new google.maps.Marker({
       position: coords,
       map: app.map,
       title: title
     });
+
     app.markers.push(marker);
+
+    // Register an info window for this marker
+    var contentString = '<div id="content">'+
+      '<div id="siteNotice">'+
+      '</div>'+
+      '<h1 id="firstHeading" class="firstHeading">'+
+      title +
+      '</h1>'+
+      '<div id="bodyContent">'+
+      '<p>Filmed at ' +
+      locations +
+      '</p>';
+    if (fun_facts != null) {
+      contentString.concat(
+        '<p>Fun facts: ' + fun_facts + '</p>'
+      );
+    }
+    contentString.concat('</div></div>');
+    this.addInfoWindow(contentString, marker)
   }
 
   // Add all pushed markers to the map
