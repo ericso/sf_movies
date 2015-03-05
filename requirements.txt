@@ -1,4 +1,4 @@
-sf_movies
 django==1.7
 selenium
 requests
+fabric
