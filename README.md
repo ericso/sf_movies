@@ -64,6 +64,6 @@ Architecture
     divs on the page on map click events. Also, doing a search should move and/or rescale the map.
     
 
-Please visit the deployed site at [SF Films](https://sffilms.heroku.com)
+Please visit the deployed site at [SF Films](http://sffilms.heroku.com)
 
 Please visit my about.me page at about.me/ericso
