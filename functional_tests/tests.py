@@ -1,9 +1,12 @@
+import sys
+
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
-import unittest
 
+from django.test import LiveServerTestCase
+# from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 
-class NewVisitorTest(unittest.TestCase):
+class NewVisitorTest(LiveServerTestCase):
 
   def setUp(self):
     self.browser = webdriver.Chrome()
@@ -13,13 +16,10 @@ class NewVisitorTest(unittest.TestCase):
     self.browser.quit()
 
 
-  ### Helper Methods ###
-
-
   ### Test Methods ###
   def test_can_see_map_a_filter_by_search_text(self):
     # The user goes to the web site
-    self.browser.get('http://localhost:8000')
+    self.browser.get(self.live_server_url)
 
     # The user sees a search box at the top of the page
     searchbox = self.browser.find_element_by_id('id_search_input')
@@ -41,9 +41,4 @@ class NewVisitorTest(unittest.TestCase):
 
     # The map changes to show only the locations for the movie "180"
 
-
     self.fail('Finish the test!')
-
-
-if __name__ == '__main__':
-  unittest.main(warnings='ignore')

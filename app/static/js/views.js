@@ -86,11 +86,12 @@ $(function() {
       app.locations.fetch({
         data: $.param({'search': search}),
         success: function(locations) {
-          // Render table with locations
-          var template = _.template(
-            $('#location-list-template').html()
-          )({locations: locations.models});
-          that.$el.html(template);
+
+          // // Render table with locations
+          // var template = _.template(
+          //   $('#location-list-template').html()
+          // )({locations: locations.models});
+          // that.$el.html(template);
 
           // Clear out the map
           app.map.deleteMarkers();
