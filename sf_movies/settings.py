@@ -8,11 +8,6 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.7/ref/settings/
 """
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-import os
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
 
@@ -58,9 +53,9 @@ ROOT_URLCONF = 'sf_movies.urls'
 
 WSGI_APPLICATION = 'sf_movies.wsgi.application'
 
+import os
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -78,13 +73,18 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 # Allow all host headers
 ALLOWED_HOSTS = ['*']
 
-# Static asset configuration
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/1.7/howto/static-files/
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'
-
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
+
+# Simplified static file serving.
+# https://warehouse.python.org/project/whitenoise/
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
