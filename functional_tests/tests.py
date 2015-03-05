@@ -22,13 +22,21 @@ class NewVisitorTest(unittest.TestCase):
     self.browser.get('http://localhost:8000')
 
     # The user sees a search box at the top of the page
-    searchbox = self.browser.find_element_by_id('id_search')
+    searchbox = self.browser.find_element_by_id('id_search_input')
 
     # The user then also sees a map below the search box
     map_area = self.browser.find_element_by_id('id_map')
 
     # The user decides to filter for the movie "180"
     searchbox.send_keys('180')
+
+    # The user sees an autocomplete selection of results
+    autocomplete_list = self.browser.find_element_by_class_name('ui-autocomplete')
+    autocomplete_tags = autocomplete_list.find_elements_by_tag_name('li')
+    self.assertIn('180', [tag.text for tag in autocomplete_tags])
+
+    # The user selects the '180' autocomplete selection and hits enter
+
     searchbox.send_keys(Keys.ENTER)
 
     # The map changes to show only the locations for the movie "180"
