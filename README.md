@@ -94,6 +94,10 @@ Better handing of the geocoding process is necessary. Most addresess were geocod
 in California and there are a lot of "No Results". Currently, the "No Results" locations are still being returned
 by the API. This would not be a problem if it weren't that they also show up in the autocomplete search.
 
+The app takes a little bit of time, on the order of seconds for the javascript to load and the server to return
+data. Optimization of this would be desirable. A possibility could be to not query until a search is performed.
+Adding the coordinates of the map bounding viewport to filter results would increase speed as well. Also, a loading
+indicator would give the user feedback and prevent them from wondering if the app crashed or something.
     
 
 Please visit the deployed site at [SF Films](http://sffilms.heroku.com)
