@@ -36,9 +36,13 @@ class NewVisitorTest(LiveServerTestCase):
     self.assertIn('180', [tag.text for tag in autocomplete_tags])
 
     # The user selects the '180' autocomplete selection and hits enter
-
+    for tag in autocomplete_tags:
+      if tag.text == '180':
+        tag.click()
     searchbox.send_keys(Keys.ENTER)
 
     # The map changes to show only the locations for the movie "180"
-
-    self.fail('Finish the test!')
+    # TODO(eso) figure out how to test for this
+    # Testing for the map pins feels like we'd be testing a library
+    # Maybe test that the javascript objects are created? If so, we'd
+    # have to do that in the JS tests
