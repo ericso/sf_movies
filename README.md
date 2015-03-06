@@ -88,7 +88,12 @@ to automate deployment would be ideal.
 Future Work
 -----------
 Backbone.js models would be implemented allowing more creative things to be done such as displaying informational
-divs on the page on map click events. Also, doing a search should move and/or rescale the map.
+divs on the page on map click events. Also, doing a search should move and/or rescale the map would be cool.
+
+Better handing of the geocoding process is necessary. Most addresess were geocoded well but some ended up elsewhere
+in California and there are a lot of "No Results". Currently, the "No Results" locations are still being returned
+by the API. This would not be a problem if it weren't that they also show up in the autocomplete search.
+
     
 
 Please visit the deployed site at [SF Films](http://sffilms.heroku.com)
