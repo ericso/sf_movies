@@ -1,6 +1,7 @@
 # sf_movies
 A prototype webapp the pulls movie data from data.sfgov.org and displays it on a map. You can filter it!
-Please visit the deployed site at [SF Films](http://sffilms.heroku.com)
+
+Please visit the deployed site at [SF Films](http://sffilms.heroku.com).
 
 
 Problem/Solution
